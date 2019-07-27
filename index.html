@@ -60,24 +60,31 @@ let customers = [
     const customerEmail = document.querySelector('[name = "customer-email"]');
     const customerName = document.querySelector('[name = "customer-name"]');
     const customerIsVip = document.querySelector('#customer-isvip');
-    
+
     let currentVipStatus = false;
 
     function createDestroyButtons() {
       const destroyButtons = document.getElementsByClassName('destroyed');
-      console.log(destroyButtons);
+
       for(let i=0; i < destroyButtons.length; i++) {
+
         let eachButton = destroyButtons[i];
         eachButton.addEventListener('click', (ev) => {
+          console.log("in event listener")
           let currentDataId = eachButton.getAttribute('data-id');
           for( let j=0; j < customers.length; j++) {
             let currentCustomer = customers[j].id;
-            if(currentCustomer === currentDataId) {
+            console.log("type of customer=",  typeof currentCustomer);
+            console.log("type of data id =",  typeof currentDataId);
+            console.log("current customer =",   currentCustomer);
+            console.log("data id =",  currentDataId);
+            if(currentCustomer === +currentDataId) {
+              console.log("test")
               customers.splice(j, 1);
             }
             render();
           }
-        })
+        });
       }
     }
 
@@ -101,9 +108,11 @@ let customers = [
       const html = customers.map(customer => `<div class='customer-div'>
       <h3>${customer.name} (${customer.email})</h3> <button class="destroyed" data-id="${customer.id}">Destroy</button></div>`).join('');
       cuslist.innerHTML = html;
+      createDestroyButtons();
     };
     render();
-    createDestroyButtons();
+
+
 
   </script>
 

@@ -39,10 +39,10 @@
 
 </div>
 
-<ul id="customer-list">
+<div id="customer-list">
 
 
-</ul>
+</div>
 
   <script>
 
@@ -61,7 +61,7 @@ let customers = [
     let currentVipStatus = false;
 
     customerIsVip.addEventListener('change', (ev) => {
-      currentVipStatus = !currentVipStatus; 
+      currentVipStatus = !currentVipStatus;
       });
 
     createCustomer.addEventListener('click', (ev) => {
@@ -71,13 +71,13 @@ let customers = [
       render();
 
     });
-    
+
 
 
 
     const render = () => {
-      const html = customers.map(customer => `<li class='customer-li'>
-      ${customer.name} (${customer.email})</li>`).join('');
+      const html = customers.map(customer => `<div class='customer-div'>
+      <h3>${customer.name} (${customer.email})</h3> <button>Destroy</button></div>`).join('');
       cuslist.innerHTML = html;
     };
     render();

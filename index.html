@@ -39,6 +39,10 @@
 
 </div>
 
+<ul id="customer-list">
+
+
+</ul>
 
   <script>
 
@@ -48,6 +52,15 @@ let customers = [
       { id: 4, name: 'shep', email: 'shep@gmail.com'},
      ];
 
+
+    const cuslist = document.querySelector('#customer-list');
+
+    const render = () => {
+      const html = customers.map(customer => `<li class='customer-li'>
+      ${customer.name}</li>`).join('');
+      cuslist.innerHTML = html;
+    };
+    render();
 
 
   </script>

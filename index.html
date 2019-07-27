@@ -16,18 +16,18 @@
   <form>
 <div>
   <label for="name">Name: </label>
-  <input type="text" id="name" name="customer-name" />
+  <input type="text" id="customer-name" name="customer-name" />
 </div>
 <div>
     <label for="email">E-mail:</label>
-    <input type="email" id="email" name="customer-email" />
+    <input type="email" id="customer-email" name="customer-email" />
   </div>
   <div>
       <label for="isvip">isVIP:</label>
-      <input type="checkbox" id="isvip" name="customer-isvip" />
+      <input type="checkbox" id="customer-isvip" name="customer-isvip" />
     </div>
 
-    <button type="button">Create</button>
+    <button id="createButton" type="button">Create</button>
 
   </form>
 
@@ -54,10 +54,30 @@ let customers = [
 
 
     const cuslist = document.querySelector('#customer-list');
+    const createCustomer = document.querySelector('#createButton');
+    const customerEmail = document.querySelector('[name = "customer-email"]');
+    const customerName = document.querySelector('[name = "customer-name"]');
+    const customerIsVip = document.querySelector('#customer-isvip');
+    let currentVipStatus = false;
+
+    customerIsVip.addEventListener('change', (ev) => {
+      currentVipStatus = !currentVipStatus; 
+      });
+
+    createCustomer.addEventListener('click', (ev) => {
+      let newCustomer = {name: customerName.value, email: customerEmail.value, isVIP: currentVipStatus};
+      customers.push(newCustomer);
+      console.log(customers);
+      render();
+
+    });
+    
+
+
 
     const render = () => {
       const html = customers.map(customer => `<li class='customer-li'>
-      ${customer.name}</li>`).join('');
+      ${customer.name} (${customer.email})</li>`).join('');
       cuslist.innerHTML = html;
     };
     render();
